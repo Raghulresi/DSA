@@ -2,7 +2,12 @@
                           suitable for both sorted and unsorted array
                           it search based on the continues sequesnce
                           slow cmp to binarySearch 
-                          multidimention array allowed                   */
+                          multidimention array allowed   
+
+          Steps    ---->  1. Traverse over the array.
+                          2. Match the key element with array element.
+                          3. If key element is found, return the index position of the array element.
+                          4. If key element is not found, return -1.                                       */
 
 
 import java.util.*;

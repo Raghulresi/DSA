@@ -1,6 +1,17 @@
-/* Binary Search ----> O(log n)
-                       Array must be sorted 
-                       Faster than linearSearch    */
+/* Binary Search ---->  O(log n)
+                        Array must be sorted 
+                        Faster than linearSearch 
+
+          Steps  ---->  1. Start with a sorted array and a number you want to find (the "target").
+                        2. Find middle value to divide an array.
+                        3. check: 
+                              fisrt<=last             
+                                  middle == target --> return middle index
+                                  middle < target --> first=middle+1
+                                  middle > target --> last=middle-1
+                              first>last 
+                                  not found
+                        4. Keep repeating the process until you either find the number or run out of array to check.       */
 
 import java.util.*;
 public class Main

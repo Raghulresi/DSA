@@ -1,3 +1,9 @@
+/*  Seletion Sort ---->  O(n^2)
+
+            Steps ---->  1. Start with the first element (consider it as the minimum).
+                         2. Compare the current element with the rest of the array to find the smallest element.
+                         3. Swap the smallest element found with the current element.
+                         4. Move to the next element and repeat the process until the array is sorted.  */
 import java.util.*;
 public class Main
 {

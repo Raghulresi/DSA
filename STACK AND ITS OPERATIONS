@@ -1,0 +1,118 @@
+/* Stack     ----> Push,Pop,Peek - O(1)    */
+
+import java.util.Scanner;
+import java.util.Stack;
+
+class Main 
+{
+	// Function for pushing element
+	public static void pushval(Stack<Integer> stack, int val)
+	{
+		stack.push(val);
+		System.out.println("Pushed: " + val);
+	}
+
+	// Function for popping element
+	public static void popval(Stack<Integer> stack) 
+	{
+		if (!stack.isEmpty()) 
+		{
+			int popped = stack.pop();
+			System.out.println("Popped: " + popped);
+		} else 
+		{
+			System.out.println("Stack is empty");
+		}
+	}
+
+	// Checking peek element from stack
+	public static void peekval(Stack<Integer> stack)
+	{
+		if (!stack.isEmpty()) 
+		{
+			int peekEle = stack.peek();
+			System.out.println("Peek value in stack is: " + peekEle);
+		} else 
+		{
+			System.out.println("Stack is empty");
+		}
+	}
+
+	// Checking the size of the stack
+	public static void stacklen(Stack<Integer> stack)
+	{
+		System.out.println("Size of stack is: " + stack.size());
+	}
+
+	// Checking if the stack is empty or not
+	public static void stackemptyornot(Stack<Integer> stack)
+	{
+		if (!stack.isEmpty())
+		{
+			System.out.println("Stack is not empty");
+		} else 
+		{
+			System.out.println("Stack is empty");
+		}
+	}
+
+	// Main method
+	public static void main(String[] args)
+	{
+		Scanner sc = new Scanner(System.in);
+		Stack<Integer> stack = new Stack<>();
+		int choice, value;
+
+		// Menu-driven program for stack operations
+		do {
+			System.out.println("\nChoose an operation:");
+			System.out.println("1. Push value into the stack");
+			System.out.println("2. Pop value from the stack");
+			System.out.println("3. Peek value from the stack");
+			System.out.println("4. Check size of the stack");
+			System.out.println("5. Check if the stack is empty");
+			System.out.println("6. Exit");
+
+			System.out.print("Enter your choice: ");
+			choice = sc.nextInt();
+
+			switch (choice) 
+			{
+		    	case 1: // Push
+				     System.out.print("Enter a value to push into the stack: ");
+			         value = sc.nextInt();
+				     pushval(stack, value);
+				     break;
+
+			    case 2: // Pop
+			    	popval(stack);
+			     	break;
+
+			    case 3: // Peek
+			    	peekval(stack);
+			     	break;
+
+			    case 4: // Size
+			     	stacklen(stack);
+			    	break;
+
+			    case 5: // Check if empty
+			    	stackemptyornot(stack);
+			    	break;
+
+			    case 6: // Exit
+			     	System.out.println("Exiting...");
+			    	break;
+
+		     	default:
+			     	System.out.println("Invalid choice, please try again.");
+			}
+
+			// Display the current stack after each operation
+			System.out.println("Current stack: " + stack);
+			
+		} while (choice != 6);
+
+		sc.close();
+	}
+}

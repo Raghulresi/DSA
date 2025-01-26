@@ -1,0 +1,335 @@
+import java.util.*;
+public class singlylinkedlist
+{
+    private Node head;
+    private static class Node
+    {
+        private int data;
+        private Node next;
+        public Node(int data)
+        {
+            this.data=data;
+            this.next=null;
+        }
+    }
+    //display all element
+    public void display()
+    {
+        Node current = head;
+        while(current!=null)
+        {
+            System.out.print(current.data +" --> ");
+            current = current.next;
+        }
+        System.out.print("null");
+        
+    }
+    
+    //display length of list
+    public void length()
+    {
+        int count=0;
+        Node current = head;
+        while(current!=null)
+        {
+            count++;
+            current = current.next;
+        }
+        System.out.print(count);
+    }
+    
+    //add element at beginning
+    public void beginning(int value)
+    {
+        Node newnode = new Node(value);
+        newnode.next = head;
+        head = newnode;
+    }
+    
+    //add at end 
+    public void end(int value)
+    {
+        Node newnode = new Node(value);
+        if(head == null)
+        {
+           head = newnode;
+           return;
+        }
+        Node current = head;
+        while(current.next != null)
+        {
+            current = current.next;
+        }
+        current.next= newnode;
+    }
+    
+    //add at specific position
+    public void insertatposition(int index,int value)
+    {
+        Node newnode = new Node(value);
+        if(index==1)
+        {
+            newnode.next = head;
+            head = newnode;
+        }
+        else
+        {
+            Node previous = head;
+            int count = 1 ;
+            while(count < index-1)
+            {
+                previous = previous.next;
+                count++;
+            }
+            Node temp = previous.next;
+            newnode.next = temp;
+            previous.next = newnode;
+        }
+    }
+    
+    //Delete at first
+    public void deletefirst()
+    {
+        if(head == null)
+        {
+            return;
+        }
+        Node temp = head;
+        head = head.next;
+        temp = null;
+    }
+     
+    //Delete at last
+    public void deletelast()
+    {
+        Node current = head;
+        Node previous = null;
+        while(current.next != null)
+        {
+            previous = current;
+            current = current.next;
+        }
+        previous.next = null;
+    }
+    
+    //Delete at specific position
+    public void deleteatposition(int index)
+    {
+        if(index == 1)
+        {
+            head = head.next;
+        }
+        else
+        {
+            Node previous = head;
+            int count=1;
+            while(count < index-1)
+            {
+                previous = previous.next;
+                count++;
+            }
+            Node current =  previous.next;
+            previous.next = current.next;
+        }
+    }
+    
+    //Search the value in list
+    public boolean search(int search)
+    {
+        Node current = head;
+        while(current != null)
+        {
+            if(current.data == search)
+            {
+               return true;
+            }
+            current = current.next;
+        }
+        return false;
+    }
+    
+    //reverse the list
+    public void reverse()
+    {
+        Node current = head;
+        Node previous = null;
+        Node next = null;
+        while(current != null)
+        {
+            next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+        head = previous;
+    }
+    
+    //return middle value
+    public void middle()
+    {
+        Node slowptr = head;
+        Node fastptr = head;
+        while(fastptr != null && fastptr.next != null)
+        {
+            slowptr = slowptr.next;
+            fastptr = fastptr.next.next;
+        }
+        System.out.println(slowptr.data);
+    }
+    
+    //Display given node to end node
+    public void given_end(int index)
+    {
+        Node current = head;
+        int count=1;
+        while(count < index)
+        {
+            count++;
+            current = current.next;
+        }
+        while(current != null)
+        {
+            System.out.print(current.data+" --> ");
+            current = current.next;
+        }
+        System.out.print("null");
+    }
+    
+    //remove duplicate
+    public void remodeduplicate()
+    {
+        Node current = head;
+        while(current != null && current.next != null)
+        {
+            if(current.data == current.next.data)
+            {
+                current.next= current.next.next;
+            }
+            else
+            {
+                current = current.next;
+            }
+        }
+    }
+    
+	public static void main(String[] args)
+	{
+		Scanner sc = new Scanner(System.in);
+	    singlylinkedlist slist = new singlylinkedlist();
+	    //initial node data
+	    slist.head = new Node(10);
+	    Node second = new Node(1);
+	    Node third = new Node(5);
+	    Node fourth = new Node(8); 
+	    //node next
+	    slist.head.next = second;
+	    second.next=third;
+	    third.next = fourth;
+	    fourth.next= null;
+	    
+	    int choice,value,index;
+	    do{
+	        System.out.print("\n--------------------------------------------------");
+	        System.out.println("\n1.Display element in list");
+	        System.out.println("2.Display the length of list");
+	        System.out.println("3.Insert the node at beginning");
+	        System.out.println("4.Insert the node at end");
+	        System.out.println("5.Insert the node at given position");
+	        System.out.println("6.Delete the first node");
+	        System.out.println("7.Delete the last node");
+	        System.out.println("8.Delete the given node");
+	        System.out.println("9.Search element in list");
+	        System.out.println("10.Reverse the list");
+	        System.out.println("11.Return middle node");
+	        System.out.println("12.Return from given node to end node");
+	        System.out.println("13.Remove the duplicate");
+	        System.out.println("14.Exit");
+	        System.out.print("Enter the option: ");
+	        choice = sc.nextInt();
+	       
+	        
+	        switch(choice)
+	        {
+	            case 1:
+	                System.out.print("Element is the list : ");
+	                slist.display();
+	                break;
+	            case 2:
+	                System.out.print("The length of the singly linked list : ");
+	                slist.length();
+	                break;
+	            case 3:
+	                System.out.print("Eneter the value : ");
+	                value = sc.nextInt();
+	                slist.beginning(value);
+	                System.out.println("Element added at beginning successfully");
+	                break;
+	            case 4:
+	                System.out.print("Eneter the value : ");
+	                value = sc.nextInt();
+	                slist.end(value);
+	                System.out.println("Element added at end successfully");
+	                break;
+	            case 5:
+	                System.out.print("Enter the index : ");
+	                index = sc.nextInt();
+	                System.out.print("Enter the value : ");
+	                value = sc.nextInt();
+	                slist.insertatposition(index,value);
+	                System.out.println("Element added at the give position successfully");
+	                break;
+	            case 6:
+	                slist.deletefirst();
+	                System.out.println("Node at first deleted successfully");
+	                break;
+	            case 7:
+	                slist.deletelast();
+	                System.out.println("Node at last deleted successfully");
+	                break;
+	            case 8:
+	                System.out.print("Enter the index : ");
+	                index = sc.nextInt();
+	                slist.deleteatposition(index);
+	                System.out.println("Node at given position deleted successfully");
+	                break;
+	            case 9:
+	                System.out.print("Enter the value : ");
+	                value = sc.nextInt();
+	                boolean check = slist.search(value);
+	                System.out.println(check);
+	                break;
+	            case 10:
+	                slist.reverse();
+	                break;
+	            case 11:
+	                slist.middle();
+	                break;
+	            case 12:
+	                System.out.print("Enter the index : ");
+	                index = sc.nextInt();
+	                slist.given_end(index);
+	                break;
+	            case 13:
+	                slist.remodeduplicate();
+	                break;
+	            case 14:
+	                System.out.println("-----------Exited----------");
+	                break;
+	            default:
+	                System.out.println("Enter the value option");
+	                break;
+	                
+	        }
+	         System.out.print("\nElement at the list : ");
+	         Node current = slist.head;
+             while(current!=null)
+             {
+                System.out.print(current.data +" --> ");
+                current = current.next;
+             }
+             System.out.print("null");
+	        
+	    }while(choice!=14);
+	    
+	}
+}

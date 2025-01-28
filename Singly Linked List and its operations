@@ -212,6 +212,36 @@ public class singlylinkedlist
         }
     }
     
+    //insert based on ascending  * possible for sorted list *
+    public void insertascending(int value)
+    {
+        Node newnode = new Node(value);
+        Node current = head;
+        Node temp = null;
+        while(current != null && current.data < newnode.data)
+        {
+            temp = current;
+            current = current.next;
+        }
+        newnode.next = current;
+        temp.next = newnode;
+    }
+    
+    // remove by key value
+    public void removebykey(int value)
+    {
+        Node current = head;
+        Node temp = null;
+        while(current != null && current.data != value)
+        {
+            temp = current;
+            current = current.next;
+        }
+        if(current == null )
+        return ;
+        temp.next = current.next;
+    }
+    
 	public static void main(String[] args)
 	{
 		Scanner sc = new Scanner(System.in);
@@ -243,7 +273,9 @@ public class singlylinkedlist
 	        System.out.println("11.Return middle node");
 	        System.out.println("12.Return from given node to end node");
 	        System.out.println("13.Remove the duplicate");
-	        System.out.println("14.Exit");
+	        System.out.println("14.Insert on ascending order");
+	        System.out.println("15.Remove by key value");
+	        System.out.println("16.Exit");
 	        System.out.print("Enter the option: ");
 	        choice = sc.nextInt();
 	       
@@ -313,10 +345,20 @@ public class singlylinkedlist
 	                slist.remodeduplicate();
 	                break;
 	            case 14:
+	                System.out.print("Enter the value : ");
+	                value = sc.nextInt();
+	                slist.insertascending(value);
+	                break;
+	            case 15:
+	                System.out.print("Enter the value : ");
+	                value = sc.nextInt();
+	                slist.removebykey(value);
+	                break;
+	            case 16:
 	                System.out.println("-----------Exited----------");
 	                break;
 	            default:
-	                System.out.println("Enter the value option");
+	                System.out.println("Enter the valid option");
 	                break;
 	                
 	        }
@@ -329,7 +371,7 @@ public class singlylinkedlist
              }
              System.out.print("null");
 	        
-	    }while(choice!=14);
+	    }while(choice!=20);
 	    
 	}
 }

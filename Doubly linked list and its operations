@@ -15,6 +15,7 @@ public class DoublyLinked
             this.next = null;
         }
     }
+
     // Display the element in list
     public void display()
     {
@@ -58,6 +59,76 @@ public class DoublyLinked
         }
     }
     
+    //Add value at the beginning
+    public void insertbegin(int value)
+    {
+        Node newnode = new Node(value);
+        Node temp = head;
+        if(temp == null)
+        {
+            tail = newnode;
+        }
+        else
+        {
+            head.pre = newnode;
+        }
+        newnode.next = head;
+        head = newnode;
+    }
+    
+    //Insert at given position
+    public void insertatpos(int value,int index)
+    {
+        Node temp = head;
+        int count = 1;
+        while(temp != null && count > index )
+        {
+            temp = temp.next;
+        }
+        if(count == index)
+        {
+            temp.next = temp.next;
+        }
+    }
+    
+    //Delete the first Node
+    public void deletefirst()
+    {
+        Node temp = head;
+        if(temp == null)
+        {
+            System.out.println("!!! List is alread empty !!!");
+        }
+        if(tail == head)
+        {
+            tail = null;
+        }
+        else
+        {
+            head.next.pre = null;  
+        }
+        head = head.next;
+    }
+    
+    //Delete the last node in list
+    public void deleteend()
+    {
+        Node temp = head;
+        if(temp == null)
+        {
+            System.out.println("!!! List is alread empty !!!");
+        }
+        if(temp == tail)
+        {
+            tail = null;
+        }
+        else 
+        {
+            tail.pre.next = null;
+        }
+        tail = tail.pre;
+    }
+    
     public static void main(String[] args)
     {
         Scanner sc = new Scanner(System.in);
@@ -65,17 +136,21 @@ public class DoublyLinked
         list.insertlast(1);
         list.insertlast(10);
         list.insertlast(12);
-        
-        int choice,value;
+
+        int choice,value,index;
         do
         {
             System.out.print("-------------------------------------------------");
             System.out.println("\n1.Display the value in list");
             System.out.println("2.Return the length of list");
             System.out.println("3.Enter the value to add at last");
+            System.out.println("4.Enter the value at beginning");
+            System.out.println("5.Enter the value at given position");
+            System.out.println("6.Delete the first node in list");
+            System.out.println("7.Delete the last node in list");
             System.out.print("Enter the option : ");
             choice = sc.nextInt();
-            
+
             switch(choice)
             {
                 case 1:
@@ -91,7 +166,25 @@ public class DoublyLinked
                     value = sc.nextInt();
                     list.insertlast(value);
                     break;
-                    
+                case 4:
+                    System.out.print("Enter the value : ");
+                    value = sc.nextInt();
+                    list.insertbegin(value);
+                    break;
+                case 5:
+                    System.out.print("Enter the value : ");
+                    value = sc.nextInt();
+                    System.out.print("Enter the index : ");
+                    index = sc.nextInt();
+                    list.insertatpos(value,index);
+                    break;
+                case 6:
+                    list.deletefirst();
+                    break;
+                case 7:
+                    list.deleteend();
+                    break;
+
             }
             Node temp = list.head;
             System.out.print("LIST ==> ");
@@ -101,7 +194,9 @@ public class DoublyLinked
                temp = temp.next;
             }
                System.out.println("null ");
-               
+
         }while(choice!=10);
     }
 }
+
+

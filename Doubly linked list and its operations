@@ -1,0 +1,107 @@
+import java.util.*;
+public class DoublyLinked
+{
+    private Node head;
+    private Node tail;
+    private class Node
+    {
+        private Node pre;
+        private int data;
+        private Node next;
+        public Node(int data)
+        {
+            this.pre = null;
+            this.data = data;
+            this.next = null;
+        }
+    }
+    // Display the element in list
+    public void display()
+    {
+        Node temp = head;
+        while(temp != null)
+        {
+            System.out.print(temp.data + " <--> ");
+            temp = temp.next;
+        }
+        System.out.println("null ");
+    }
+    
+    //Return length of list
+    public void length()
+    {
+        Node temp = head;
+        int count = 0;
+        while(temp != null)
+        {
+            count++;
+            temp = temp.next;
+        }
+        System.out.println(count);
+    }
+    
+    //Insert the value at last of list
+    public void insertlast(int value)
+    {
+        Node newnode = new Node(value);
+        Node temp = head;
+        if(temp == null)
+        {
+            head = newnode;
+            tail = newnode;
+        }
+        else
+        {
+            tail.next = newnode;
+            newnode.pre = tail;
+            tail = newnode;
+        }
+    }
+    
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        DoublyLinked list = new DoublyLinked();
+        list.insertlast(1);
+        list.insertlast(10);
+        list.insertlast(12);
+        
+        int choice,value;
+        do
+        {
+            System.out.print("-------------------------------------------------");
+            System.out.println("\n1.Display the value in list");
+            System.out.println("2.Return the length of list");
+            System.out.println("3.Enter the value to add at last");
+            System.out.print("Enter the option : ");
+            choice = sc.nextInt();
+            
+            switch(choice)
+            {
+                case 1:
+                    System.out.print("Element in the list : ");
+                    list.display();
+                    break;
+                case 2:
+                    System.out.print("Length = ");
+                    list.length();
+                    break;
+                case 3:
+                    System.out.print("Enter the value : ");
+                    value = sc.nextInt();
+                    list.insertlast(value);
+                    break;
+                    
+            }
+            Node temp = list.head;
+            System.out.print("LIST ==> ");
+            while(temp!=null)
+            {
+               System.out.print(temp.data+" <--> ");
+               temp = temp.next;
+            }
+               System.out.println("null ");
+               
+        }while(choice!=10);
+    }
+}

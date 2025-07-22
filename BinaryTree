@@ -1,0 +1,141 @@
+import java.util.*;
+class Node
+{
+    int data;
+    Node left;
+    Node right;
+    Node(int v)
+    {
+        this.data = v;
+        left = null;
+        right = null;
+    }
+}
+class BinaryTree
+{
+    public static String Insert(Node root,Node node)
+    {
+        if(root==null || node==null)
+        {
+            return "Node is null";
+        }
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty())
+        {
+            //add at left
+            Node temp = q.poll();
+            if(temp.left==null)
+            {
+                temp.left = node;
+                break;
+            }
+            else
+            {
+                q.add(temp.left);
+            }
+            //add at right
+            if(temp.right==null)
+            {
+                temp.right = node;
+                break;
+            }
+            else
+            {
+                q.add(temp.right);
+            }
+        }
+        return "Node Inserted!";
+    }
+    
+    public static void PrintInorder(Node root)
+    {
+        if(root == null) return;
+        PrintInorder(root.left);
+        System.out.print(root.data+" ");
+        PrintInorder(root.right);
+    }
+    
+    public static void PrintPreorder(Node root)
+    {
+        if(root == null) return;
+        System.out.print(root.data+" ");
+        PrintPreorder(root.left);
+        PrintPreorder(root.right);
+    }
+    
+    public static void PrintPostorder(Node root)
+    {
+        if(root == null) return;
+        PrintPostorder(root.left);
+        PrintPostorder(root.right);
+        System.out.print(root.data+" ");
+    }
+    
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        int choice,val,n,rt;
+        Node root = null;
+        do
+        { 
+            System.out.println();
+            System.out.println("------------------------------");
+            System.out.println("1.Insert Inorder traversal");
+            System.out.println("2.Insert preorder traversal");
+            System.out.println("3.Insert postorder traversal");
+            System.out.print("Enter the choice : ");
+            choice = sc.nextInt();
+            switch(choice)
+            {
+                case 1:
+                    System.out.print("Enter the total node : ");
+                    n = sc.nextInt();
+                    System.out.print("Enter root node : ");
+                    rt = sc.nextInt();
+                    root = new Node(rt);
+                    System.out.print("Enter the child node : ");
+                    for(int i=1;i<n;i++)
+                    {
+                        int a = sc.nextInt();
+                        Node node = new Node(a);
+                        Insert(root,node);
+                    }
+                    PrintInorder(root);
+                    break;
+                case 2:
+                    System.out.print("Enter the total node : ");
+                    n = sc.nextInt();
+                    System.out.print("Enter root node : ");
+                    rt = sc.nextInt();
+                    root = new Node(rt);
+                    System.out.print("Enter the child node : ");
+                    for(int i=1;i<n;i++)
+                    {
+                        int a = sc.nextInt();
+                        Node node = new Node(a);
+                        Insert(root,node);
+                    }
+                    PrintPreorder(root);
+                    break;
+                case 3:
+                    System.out.print("Enter the total node : ");
+                    n = sc.nextInt();
+                    System.out.print("Enter root node : ");
+                    rt = sc.nextInt();
+                    root = new Node(rt);
+                    System.out.print("Enter the child node : ");
+                    for(int i=1;i<n;i++)
+                    {
+                        int a = sc.nextInt();
+                        Node node = new Node(a);
+                        Insert(root,node);
+                    }
+                    PrintPostorder(root);
+                    break;
+            }
+            
+        }
+        while(choice!=10);
+    }
+}

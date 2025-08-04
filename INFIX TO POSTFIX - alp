@@ -1,0 +1,56 @@
+import java.util.*;
+public class Main
+{
+    public static int pre(char c)
+    {
+        if (c == '^') return 3;
+        else if (c == '/' || c == '*') return 2;
+        else if (c == '+' || c == '-') return 1;
+        else return -1;
+    }
+    public static String infixToPostfix(String s)
+    {
+        Stack<Character> st = new Stack<>();
+        StringBuilder sb = new StringBuilder();
+        for(char c : s.toCharArray())
+        {
+            if(Character.isLetter(c) || Character.isDigit(c))
+            {
+                sb.append(c);
+            }
+            else if(c=='(') 
+            {
+                st.push(c);
+            }
+            else if(c==')')
+            {
+                while(!st.isEmpty() && st.peek()!='(')
+                {
+                    sb.append(st.pop());
+                }
+                st.pop();
+            }
+            else 
+            {
+                while(!st.isEmpty() && pre(c)<=pre(st.peek()))
+                {
+                    sb.append(st.pop());
+                }
+                st.push(c);
+            }
+        }
+        while(!st.isEmpty())
+        {
+            sb.append(st.pop());
+        }
+        return sb.toString();
+    }
+    
+	public static void main(String[] args) 
+	{
+		Scanner sc = new Scanner(System.in);
+		String s = "a+b*(c^d-e)^(f+g*h)-i"; // abcd^e-fgh*+^*+i-
+		String ans = infixToPostfix(s);
+		System.out.println(ans);
+	}
+}
